@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8f6">
+  <title>{% block title %}HireSense AI — safer job search{% endblock %}</title>
+  <script>window.tailwind = window.tailwind || {}; window.tailwind.config = { theme: { extend: { colors: { hiresense: '#10B981' } } } };</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='upgrade.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='app-fixes.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">h</span><span>HireSense <span class="brand-light">AI</span></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="{{ 'active' if request.endpoint == 'index' else '' }}" href="{{ url_for('index') }}">Overview</a>
+      <a class="{{ 'active' if request.endpoint in ['jobs', 'job_detail'] else '' }}" href="{{ url_for('jobs') }}">Find jobs</a>
+      <a class="{{ 'active' if request.endpoint in ['applications', 'my_applications'] else '' }}" href="/my-applications">My applications</a>
+      <a class="{{ 'active' if request.endpoint == 'improvement' else '' }}" href="{{ url_for('improvement') }}">Rejection reasons</a>
+    </nav>
+    <a class="topbar-cta" href="{{ url_for('new_report') }}">Report a listing <span aria-hidden="true">↗</span></a>
+  </header>
+  <main class="mx-auto max-w-6xl">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-stack" role="status">
+          {% for category, message in messages %}<div class="flash flash-{{ category }}" data-toast-type="{{ category }}">{{ message }}</div>{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="footer">
+    <a class="brand footer-brand" href="{{ url_for('index') }}"><span class="brand-mark">h</span><span>HireSense <span class="brand-light">AI</span></span></a>
+    <p>Evidence before applications. People before predictions.</p>
+    <span>© 2026 HireSense AI · Demo portal</span>
+  </footer>
+  <script src="{{ url_for('static', filename='toast.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>

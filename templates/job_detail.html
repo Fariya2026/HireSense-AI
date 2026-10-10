@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} — HireSense AI{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('jobs') }}">Find jobs</a><span>/</span><span>{{ job.company }}</span></div>
+{% include "_scam_safety_notice.html" %}
+<div class="detail-layout">
+  <div class="detail-main">
+    {% if job.expired %}<div class="expired-detail-badge">Expired — Cannot Apply</div>{% endif %}
+    <section class="detail-heading">
+      <div class="detail-company-icon">{{ job.company[0] }}</div>
+      <div class="detail-title"><span class="section-kicker">{{ job.company }} {% if job.company_verified %}<span class="mini-verified" title="Company verified">✓ Company verified</span>{% endif %}</span><h1>{{ job.title }}</h1><div class="job-meta"><span>⌖ {{ job.location }}</span><span>◷ {{ job.work_type }}</span><span>◉ {{ job.experience_level }}</span></div><div class="detail-salary">{{ job.salary if job.salary_disclosed else 'Salary Not Disclosed — Verify before applying' }}</div></div>
+      <form action="{{ url_for('save_job', job_id=job.id) }}" method="post"><button class="button button-outline" type="submit">{{ '♥ Saved' if saved else '♡ Save job' }}</button></form>
+    </section>
+    <section class="content-panel">
+      <div class="panel-heading"><div><span class="section-kicker">THE OPPORTUNITY</span><h2>About this role</h2></div><span class="date-chip">Posted {{ job.posted_on }}</span></div>
+      <p class="body-copy">{{ job.description }}</p>
+      <h3 class="subheading">Skills mentioned</h3><div class="skill-tags">{% for skill in job.skills %}<span>{{ skill }}</span>{% endfor %}</div>
+      <a class="text-link naukri-search-link" href="{{ job.naukri_url }}" target="_blank" rel="noopener noreferrer">Search comparable live roles on Naukri ↗</a>
+    </section>
+    <section class="content-panel" id="eligibility">
+      <div class="panel-heading"><div><span class="section-kicker">A HELPFUL SELF-CHECK</span><h2>How close is your match?</h2></div><span class="panel-icon">◎</span></div>
+      <p class="body-copy">Compare your skills with the ones listed for this role. This is a guide, not a hiring decision.</p>
+      <form class="skills-form" action="{{ url_for('evaluate_job', job_id=job.id) }}" method="post">
+        <label for="skills-{{ job.id }}">Your skills <span>Separate skills with commas</span></label>
+        <textarea id="skills-{{ job.id }}" name="skills" rows="3" placeholder="For example: Python, SQL, Git" required>{% if evaluation %}{{ evaluation.candidate_skills|join(', ') }}{% endif %}</textarea>
+        <button class="button button-outline" type="submit">Check my match <span>→</span></button>
+      </form>
+      {% if evaluation %}
+      <div class="match-result"><div class="match-score"><b>{{ evaluation.match_percent }}%</b><span>skills match</span></div><div class="match-details">
+        {% if evaluation.matched %}<p class="match-good">Already matching: {{ evaluation.matched|join(', ') }}</p>{% endif %}
+        {% if evaluation.missing %}<p class="match-gap"><b>Worth building:</b> {{ evaluation.missing|join(', ') }}</p>{% else %}<p class="match-good">Your listed skills cover every skill in this sample listing.</p>{% endif %}
+        <a class="text-link" href="{{ url_for('improvement') }}">Open your improvement plan →</a>
+      </div></div>
+      {% endif %}
+      <div class="apply-panel" id="apply">
+        {% if application %}
+        <span class="already-applied-badge">✓ Already Applied</span>
+        <p>Your application is in the <b>{{ application.status }}</b> stage.</p>
+        <a class="button button-outline" href="/my-applications">View My Applications <span>→</span></a>
+        {% elif job.expired %}
+        <span class="expired-detail-badge">Expired — Cannot Apply</span>
+        <button class="button button-primary apply-submit-button" type="button" disabled>Applications closed</button>
+        {% else %}
+        <span class="section-kicker">READY FOR YOUR NEXT STEP?</span>
+        <button class="button button-primary apply-submit-button" type="button" data-open-application>Apply for this job <span aria-hidden="true">→</span></button>
+        {% endif %}
+      </div>
+    </section>
+  </div>
+  <aside class="detail-sidebar">
+    <section class="trust-panel">
+      <div class="trust-heading"><span class="trust-icon">✳</span><div><span class="section-kicker">LISTING CHECK</span><h2>What we noticed</h2></div></div>
+      <div class="trust-score"><div class="score-number">{{ job.trust.score }}<small>/100</small></div><div><small class="trust-score-caption">Trust score</small><span class="risk-pill risk-{{ job.trust.level|lower }}">{{ job.trust.level }} signals</span><small>Signals are not proof of fraud.</small></div></div>
+      <ul class="signal-list">{% for kind, signal in job.trust.signals %}<li class="{{ 'signal-warning' if kind == 'warning' else 'signal-positive' }}"><span>{{ '!' if kind == 'warning' else '✓' }}</span>{{ signal }}</li>{% endfor %}</ul>
+      <div class="trust-disclaimer">Always verify the employer and never pay to apply. A low score cannot guarantee a job is genuine.</div>
+      <a class="text-link" href="{{ url_for('new_report', job_id=job.id) }}">Something feel off? Report it →</a>
+    </section>
+    <section class="deadline-card"><span class="section-kicker">APPLICATION DEADLINE</span><b>{{ job.expires_on }}</b><small>{{ 'This listing has expired.' if job.expired else 'Check the employer page before applying.' }}</small></section>
+  </aside>
+</div>
+{% if not job.expired and not application %}
+<dialog class="application-dialog" id="application-dialog" aria-labelledby="application-dialog-title">
+  <form class="application-form" action="/job/{{ job.id }}/apply" method="post" enctype="multipart/form-data">
+    <div class="application-dialog-heading"><div><span class="section-kicker">YOUR APPLICATION</span><h2 id="application-dialog-title">Apply for {{ job.title }}</h2></div><button class="dialog-close" type="button" data-close-application aria-label="Close application form">×</button></div>
+    <p class="application-intro">Applying to <b>{{ job.company }}</b>. Your details are stored in this demo's local database. Skill matching prepares an editable draft; nothing is submitted until you review and submit it here.</p>
+    <label for="applicant-name">Full name</label>
+    <input id="applicant-name" name="name" autocomplete="name" minlength="2" maxlength="120" required>
+    <label for="applicant-email">Email address</label>
+    <input id="applicant-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+    <label for="resume-file">Upload resume <span>PDF, DOC, DOCX or TXT · up to 5 MB</span></label>
+    <input id="resume-file" name="resume_file" type="file" accept=".pdf,.doc,.docx,.txt">
+    <div class="resume-or"><span>OR PASTE RESUME TEXT</span></div>
+    <label class="visually-hidden" for="resume-text">Paste resume text</label>
+    <textarea id="resume-text" name="resume_text" rows="5" maxlength="50000" placeholder="Paste your resume text here"></textarea>
+    <label class="application-skills-label" for="application-skills">Your relevant skills <span>Comma separated; only skills you enter are used</span></label>
+    <input id="application-skills" name="skills" maxlength="2000" placeholder="Python, SQL, Git">
+    <button class="button button-outline prepare-application-button" type="button" data-prepare-application data-prepare-url="{{ url_for('prepare_application', job_id=job.id) }}">Match skills &amp; prepare draft</button>
+    <p class="preparation-disclaimer">Prototype skill matching uses listed role skills and your self-reported skills; it does not read or invent resume experience and does not connect to an external AI service.</p>
+    <section class="prepared-match" data-match-results hidden aria-live="polite">
+      <div class="prepared-match-heading"><b>Application match</b><span><span data-match-percent>0</span>%</span></div>
+      <div class="prepared-match-track"><span data-match-bar></span></div>
+      <p data-match-summary></p>
+      <p class="prepared-missing" data-match-missing></p>
+      <label for="application-note">Review and edit your application note</label>
+      <textarea id="application-note" name="application_note" rows="5" maxlength="5000" required></textarea>
+    </section>
+    <p class="resume-validation" data-resume-validation role="alert"></p>
+    <div class="application-form-actions"><button class="button button-outline" type="button" data-close-application>Cancel</button><button class="button button-primary apply-submit-button" type="submit" disabled>Prepare match to continue <span>→</span></button></div>
+  </form>
+</dialog>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,85 @@
+:root{--ink:#111827;--muted:#6b7280;--green:#10B981;--green-dark:#059669;--mint:#ecfdf5;--paper:#fff;--line:#e5e7eb;--shadow:0 14px 36px rgba(17,24,39,.08)}
+body{background:#fff;color:#111827}
+.brand-mark{background:#10B981}
+.main-nav a:hover,.main-nav a.active,.text-link,.topbar-cta{color:#059669}
+.main-nav a.active:after{background:#10B981}
+.topbar-cta{border-color:#a7f3d0}
+.button-primary{background:#10B981;box-shadow:0 5px 14px rgba(16,185,129,.18)}
+.button-primary:hover:not(:disabled){background:#059669}
+.button-outline{color:#047857;border-color:#a7f3d0}
+.risk-low{color:#047857;background:#d1fae5}
+.hero h1 span,.page-hero h1 span,.report-layout h1 span{color:#059669}
+.job-search-form{display:grid;gap:12px}
+.filter-bar{display:grid;grid-template-columns:1fr 1fr 1fr minmax(180px,1.3fr) auto auto;align-items:end;gap:12px;padding:13px 15px;background:rgba(255,255,255,.88);border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 25px rgba(17,24,39,.045);backdrop-filter:blur(12px)}
+.filter-bar label{display:grid;gap:5px;color:#4b5563;font-size:10px;font-weight:700}
+.filter-bar select,.status-update-form select{height:35px;min-width:0;border:1px solid #e5e7eb;border-radius:7px;padding:0 9px;background:white;color:#1f2937;font-size:11px;outline:none}
+.filter-bar select:focus,.status-update-form select:focus{border-color:#10B981;box-shadow:0 0 0 3px #10b98122}
+.salary-filter{grid-template-columns:1fr auto!important;align-items:center}
+.salary-filter span{color:#047857;font-size:10px}
+.salary-filter input{grid-column:1/-1;width:100%;height:15px;accent-color:#10B981}
+.filter-submit{height:35px;padding:0 12px}
+.clear-filters{padding:8px 2px;color:#6b7280;font-size:10px;font-weight:600}
+.clear-filters:hover{color:#059669}
+.job-card{border-radius:13px;border-color:#e5e7eb;box-shadow:0 5px 18px rgba(17,24,39,.035);overflow:hidden}
+.job-card:hover{border-color:#a7f3d0;box-shadow:0 14px 34px rgba(16,185,129,.1)}
+.card-trust-score{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding:9px 10px;background:#f9fafb;border-radius:8px}
+.card-trust-score>b{font-size:10px;color:#6b7280}
+.card-trust-score>span{font:700 15px Manrope;color:#059669}
+.card-trust-score small{font:500 9px "DM Sans";color:#9ca3af;margin-left:2px}
+.card-signal-details{margin-top:9px;border-top:1px solid #f0f2ef;padding-top:8px}
+.card-signal-details summary{list-style:none;cursor:pointer;color:#4b6457;font-size:9px;font-weight:700}
+.card-signal-details summary::-webkit-details-marker{display:none}
+.card-signal-details summary:after{content:"＋";float:right;color:#059669}
+.card-signal-details[open] summary:after{content:"−"}
+.card-signal-details ul{list-style:none;padding:4px 0 0;margin:0}
+.card-signal-details li{display:flex;gap:7px;align-items:flex-start;padding:5px 0;font-size:9px;line-height:1.45;color:#66736b}
+.card-signal-details li>span{display:grid;place-items:center;flex:none;width:14px;height:14px;border-radius:50%;font-size:8px;font-weight:700}
+.card-signal-details .signal-positive>span{background:#d1fae5;color:#047857}
+.card-signal-details .signal-warning>span{background:#fef3c7;color:#a16207}
+.card-report{display:inline-flex;margin-top:10px;color:#64746b;font-size:9px;font-weight:700}
+.card-report:hover{color:#b45309;text-decoration:underline}
+.expired-banner{position:absolute;z-index:3;top:11px;left:11px;padding:6px 9px;border-radius:20px;background:#fee2e2;color:#991b1b;font-size:9px;font-weight:800}
+.is-expired .job-card-content{filter:blur(1.3px);opacity:.58;user-select:none}
+.is-expired .card-report,.is-expired .card-open{position:relative;z-index:4}
+.detail-salary{margin-top:6px;color:#475569;font-size:10px;font-weight:700}
+.detail-heading .mini-verified{color:#059669}
+.trust-icon,.stat-icon.icon-green{background:#d1fae5;color:#047857}
+.score-number{color:#059669}
+.match-score b,.plan-score{color:#059669}
+.skill-progress{height:9px;overflow:hidden;border-radius:99px;background:#d1fae5;margin:0 0 14px}
+.skill-progress span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#34d399,#059669);transition:width .5s ease}
+.skill-gap-disclaimer{padding:11px 12px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px}
+.skill-gap-disclaimer b{color:#047857}
+.missing-skills{margin:-3px 0 8px;color:#53655a;font-size:10px}
+.course-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:9px}
+.course-card{display:flex;flex-direction:column;gap:6px;min-height:98px;padding:11px;border:1px solid #e5e7eb;border-radius:9px;background:#fff;box-shadow:0 5px 15px rgba(17,24,39,.035)}
+.course-card:hover{transform:translateY(-2px);border-color:#6ee7b7;box-shadow:0 10px 24px rgba(16,185,129,.1)}
+.course-topic{color:#059669;font-size:8px;font-weight:800;letter-spacing:.5px}
+.course-card>b{font:700 10px Manrope;line-height:1.45;color:#1f2937}
+.course-open{margin-top:auto;color:#64748b;font-size:8px}
+.kanban-board{display:grid;grid-template-columns:repeat(5,minmax(205px,1fr));gap:12px;overflow-x:auto;padding:3px 1px 28px}
+.kanban-column{min-width:205px;padding:11px;border:1px solid #e5e7eb;border-radius:12px;background:#f9fafb}
+.kanban-heading{display:flex;align-items:center;gap:8px;padding:3px 2px 12px}
+.kanban-heading h2{flex:1;margin:0;font:700 11px Manrope}
+.kanban-dot{width:8px;height:8px;border-radius:50%;background:#10B981}
+.dot-under-review{background:#f59e0b}.dot-interview{background:#6366f1}.dot-rejected{background:#ef4444}.dot-accepted{background:#10b981}
+.kanban-count{min-width:20px;padding:2px 5px;text-align:center;background:#fff;border:1px solid #e5e7eb;border-radius:20px;color:#64748b;font-size:9px}
+.kanban-cards{display:grid;align-content:start;gap:9px;min-height:170px}
+.application-card{display:grid;gap:10px;padding:13px;border-radius:10px;border-color:#e5e7eb;box-shadow:0 4px 12px rgba(17,24,39,.04)}
+.application-card .app-info h3{font:700 12px Manrope;margin:4px 0}
+.application-card .app-info small{font-size:9px;color:#9ca3af}
+.app-gaps{grid-column:auto;color:#64748b;font-size:9px}
+.status-update-form{display:grid;grid-template-columns:1fr auto;align-items:end;gap:6px}
+.status-update-form label{grid-column:1/-1;color:#6b7280;font-size:9px;font-weight:700}
+.status-update-form select{height:31px;font-size:9px}
+.status-update-form .button{height:31px;padding:0 8px;font-size:9px}
+.application-card>.text-link{font-size:9px}
+.kanban-empty{padding:18px 8px;border:1px dashed #d1d5db;border-radius:8px;text-align:center;color:#9ca3af;font-size:9px}
+.loading-spinner{width:13px;height:13px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+.is-loading{opacity:.8;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes rise-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.job-card,.content-panel,.trust-panel,.application-card{animation:rise-in .3s ease both}
+@media(max-width:950px){.filter-bar{grid-template-columns:repeat(3,1fr)}.filter-submit{width:100%}.course-list{grid-template-columns:1fr}}
+@media(max-width:620px){.filter-bar{grid-template-columns:1fr 1fr;gap:10px}.salary-filter{grid-column:1/-1}.filter-submit{font-size:9px}.clear-filters{text-align:center}.card-signal-details li{font-size:8px}.course-list{grid-template-columns:1fr}.course-card{min-height:70px}.kanban-board{grid-template-columns:repeat(5,minmax(230px,78vw))}.detail-salary{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

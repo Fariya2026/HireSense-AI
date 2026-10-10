@@ -1,0 +1,23 @@
+<article class="job-card {{ 'is-expired' if job.expired else '' }}" data-job-href="/job/{{ job.id }}" tabindex="0" role="link" aria-label="Open {{ job.title }} at {{ job.company }}">
+  {% if job.expired %}<span class="expired-banner">Expired — Cannot Apply</span>{% endif %}
+  <div class="job-card-content">
+    <div class="job-card-top"><span class="company-icon">{{ job.company[0] }}</span><span class="risk-pill risk-{{ job.trust.level|lower }}">{{ job.trust.level }} signals</span></div>
+    <h3><a href="/job/{{ job.id }}">{{ job.title }}</a></h3>
+    <div class="job-company">{{ job.company }} {% if job.company_verified %}<span class="mini-verified" title="Company identity marked verified">✓</span>{% endif %}</div>
+    <div class="job-meta"><span>⌖ {{ job.location }}</span><span>◷ {{ job.work_type }}</span><span>◉ {{ job.experience_level }}</span></div>
+    <div class="job-card-bottom"><span class="job-salary">{{ job.salary if job.salary_disclosed else 'Salary Not Disclosed — Verify before applying' }}</span><span class="job-date">{{ 'Expired' if job.expired else 'Closes ' + job.expires_on }}</span></div>
+    <div class="card-trust-score"><b>Trust score</b><span>{{ job.trust.score }}<small>/100</small></span></div>
+    <details class="card-signal-details"><summary>Why this score? {{ job.trust.signals|length }} explainable signals</summary><ul>{% for kind, signal in job.trust.signals %}<li class="{{ 'signal-warning' if kind == 'warning' else 'signal-positive' }}"><span>{{ '!' if kind == 'warning' else '✓' }}</span>{{ signal }}</li>{% endfor %}</ul></details>
+    <div class="job-card-actions">
+      {% if job.expired %}
+      <button class="button button-primary apply-now-button" type="button" disabled>Expired — Cannot Apply</button>
+      {% elif job.id in applied_ids %}
+      <span class="already-applied-badge">✓ Already Applied</span>
+      <a class="button button-outline apply-now-button" href="/my-applications">View application</a>
+      {% else %}
+      <a class="button button-primary apply-now-button" href="/job/{{ job.id }}#apply">Apply Now <span aria-hidden="true">→</span></a>
+      {% endif %}
+    </div>
+  </div>
+  <a class="card-report" href="{{ url_for('new_report', job_id=job.id) }}">Report a listing</a>
+</article>

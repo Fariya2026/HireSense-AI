@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Find jobs — HireSense AI{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div><span class="section-kicker">A BETTER SHORTLIST STARTS HERE</span><h1>Find work with<br><span>clearer signals.</span></h1><p>Every listing includes explainable trust signals. A signal is a prompt to verify, not a verdict.</p></div>
+  <div class="page-hero-aside"><span class="aside-mark">✳</span><span><b>Know before you go</b><small>Check fees, expiry dates<br>and employer details.</small></span></div>
+</section>
+{% include "_scam_safety_notice.html" %}
+<form class="job-search-form" action="{{ url_for('jobs') }}" method="get">
+  <div class="search-bar"><span class="search-icon">⌕</span><input type="search" name="q" value="{{ search }}" placeholder="Search jobs, companies, locations or descriptions" aria-label="Search jobs"><button class="button button-primary" type="submit">Search listings <span>→</span></button></div>
+  <div class="filter-bar">
+    <label>Location<select name="location"><option value="">Any location</option>{% for value in ['Remote', 'Hybrid', 'Onsite'] %}<option value="{{ value }}" {% if filters.location == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+    <label>Job type<select name="work_type"><option value="">Any type</option>{% for value in ['Full-time', 'Internship', 'Contract'] %}<option value="{{ value }}" {% if filters.work_type == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+    <label>Experience<select name="experience"><option value="">Any level</option>{% for value in ['Entry-level', 'Mid-level', 'Senior-level'] %}<option value="{{ value }}" {% if filters.experience == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+    <label class="salary-filter">Minimum salary <span id="salary-min-label">${{ '{:,}'.format(filters.salary_min) }}</span><input type="range" min="0" max="200000" step="5000" name="salary_min" value="{{ filters.salary_min }}" aria-label="Minimum annual salary"></label>
+    <button class="button button-outline filter-submit" type="submit">Apply filters</button>
+    <a class="clear-filters" href="{{ url_for('jobs') }}">Clear</a>
+  </div>
+</form>
+<div class="listing-toolbar"><span><b>{{ jobs|length }}</b> matching listings</span><span class="toolbar-note"><span class="pulse"></span> Trust signals explain what we noticed</span></div>
+<p class="sample-listings-note">Demo listings use original example descriptions for roles commonly searched on Naukri. They are not live Naukri vacancies; open a listing to search Naukri for comparable roles.</p>
+{% if jobs %}
+<div class="job-grid job-grid-list">{% for job in jobs %}{% include "_job_card.html" %}{% endfor %}</div>
+{% else %}
+<div class="empty-state"><span>⌕</span><h2>No listings found</h2><p>Try a different title, company or location.</p><a class="text-link" href="{{ url_for('jobs') }}">Clear search →</a></div>
+{% endif %}
+{% endblock %}

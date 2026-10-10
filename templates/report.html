@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Report a listing — HireSense AI{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('jobs') }}">Find jobs</a><span>/</span><span>Report a listing</span></div>
+<section class="report-layout">
+  <div><span class="section-kicker">HELP KEEP THE SEARCH SAFER</span><h1>Something not<br><span>adding up?</span></h1><p>Share what you noticed. Reports are stored for review in this demo; they do not automatically prove misconduct.</p><div class="report-reminder"><span>!</span><p>Never send money or sensitive identity documents to an unverified recruiter.</p></div></div>
+  <form class="content-panel report-form" action="{{ url_for('submit_report') }}" method="post">
+    <h2>Tell us what happened</h2>
+    <label for="report-job">Job listing</label>
+    <select id="report-job" name="job_id" required><option value="">Choose a listing</option>{% for listing in listings %}<option value="{{ listing.id }}" {% if job and job.id == listing.id %}selected{% endif %}>{{ listing.title }} — {{ listing.company }}</option>{% endfor %}</select>
+    <label for="reason">What concerned you?</label>
+    <select id="reason" name="reason" required><option value="">Choose a reason</option><option>Payment request</option><option>Impersonation</option><option>Misleading details</option><option>Expired listing</option><option>Duplicate listing</option><option>Other</option></select>
+    <label for="details">Details <span>Optional, up to 2,000 characters</span></label>
+    <textarea id="details" name="details" rows="5" maxlength="2000" placeholder="Describe the message or listing detail that concerned you."></textarea>
+    <button class="button button-primary" type="submit">Submit for review <span>→</span></button>
+  </form>
+</section>
+{% endblock %}

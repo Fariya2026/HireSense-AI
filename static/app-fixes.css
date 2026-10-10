@@ -1,0 +1,101 @@
+:root{--app-green:#10B981;--app-dark:#111827;--app-muted:#6b7280}
+html{scroll-behavior:smooth}
+body{background:#fff!important;color:#111827!important;font-family:Inter,Arial,sans-serif!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+main{background:#fff!important;backdrop-filter:none!important;filter:none!important}
+h1,h2,h3,.brand,.signal-title,.kanban-heading h2{font-family:Inter,Arial,sans-serif!important;font-weight:600}
+.topbar{background:#fff!important;border-bottom:1px solid #e5e7eb!important;backdrop-filter:none!important;box-shadow:0 1px 2px rgba(0,0,0,.025);z-index:10}
+.main-nav a.active,.main-nav a:hover{color:#059669}
+.brand-mark,.button-primary{background:#10B981!important}
+.button-primary{color:#fff!important;box-shadow:0 4px 12px rgba(0,0,0,.08)!important}
+.button-primary:hover:not(:disabled){background:#059669!important;box-shadow:0 7px 16px rgba(16,185,129,.22)!important}
+.button:focus-visible,a:focus-visible,button:focus-visible,.job-card:focus-visible{outline:3px solid #6ee7b7;outline-offset:3px}
+.job-search-form{position:sticky;top:76px;z-index:8;background:#fff;padding:8px 0 10px}
+.filter-bar{background:#fff!important;backdrop-filter:none!important;box-shadow:0 4px 12px rgba(0,0,0,.08)!important;border-color:#e5e7eb}
+.job-card{cursor:pointer;background:#fff!important;border:1px solid #e5e7eb!important;border-radius:14px!important;box-shadow:0 4px 12px rgba(0,0,0,.08)!important;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease!important}
+.job-card:hover,.job-card:focus-visible{transform:translateY(-5px)!important;box-shadow:0 12px 26px rgba(0,0,0,.12)!important;border-color:#a7f3d0!important}
+.job-card h3 a{font-weight:600;color:#111827}
+.job-card-actions{display:grid;gap:8px;margin-top:14px}
+.apply-now-button{width:100%;min-height:43px;font-size:13px;font-weight:700;border-radius:9px;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
+.apply-now-button:hover:not(:disabled){transform:translateY(-2px) scale(1.01);box-shadow:0 8px 18px rgba(16,185,129,.23)}
+.apply-now-button:active:not(:disabled),.apply-submit-button:active:not(:disabled){transform:scale(.97)}
+.apply-now-button:disabled{background:#fee2e2!important;color:#991b1b!important;opacity:1!important;box-shadow:none!important;cursor:not-allowed}
+.already-applied-badge,.expired-detail-badge{display:inline-flex;align-items:center;gap:6px;width:max-content;padding:7px 10px;border-radius:999px;font-size:10px;font-weight:700}
+.already-applied-badge{background:#d1fae5;color:#047857}
+.expired-detail-badge{background:#fee2e2;color:#991b1b}
+.is-expired .job-card-content{filter:blur(1px);opacity:.62}
+.is-expired .expired-banner{z-index:4;box-shadow:0 2px 8px rgba(127,29,29,.12)}
+.is-expired .apply-now-button{position:relative;z-index:5}
+.card-report{position:relative;z-index:5}
+.detail-heading,.content-panel,.trust-panel,.deadline-card,.application-card{background:#fff!important;box-shadow:0 4px 12px rgba(0,0,0,.08)!important}
+.detail-heading h1,.content-panel h2,.trust-heading h2{font-weight:600}
+.apply-panel{display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding-top:17px;margin-top:18px;border-top:1px solid #e5e7eb}
+.apply-panel>.section-kicker{width:100%}
+.apply-panel>p{margin:0;color:#4b5563;font-size:12px}
+.apply-submit-button{min-width:210px;min-height:50px;padding:13px 20px;font-size:14px;font-weight:700;border-radius:10px}
+.application-dialog{width:min(550px,calc(100% - 28px));max-height:min(88vh,850px);padding:0;border:1px solid #e5e7eb;border-radius:16px;background:#fff;color:#111827;box-shadow:0 24px 75px rgba(0,0,0,.24)}
+.application-dialog::backdrop{background:rgba(17,24,39,.48)}
+.application-form{padding:24px;overflow:auto;max-height:min(88vh,850px)}
+.application-dialog-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}
+.application-dialog-heading h2{font-size:21px;line-height:1.3;margin:6px 0 0}
+.dialog-close{width:34px;height:34px;border:0;border-radius:8px;background:#f3f4f6;color:#4b5563;font-size:23px;line-height:1;cursor:pointer}
+.dialog-close:hover{background:#e5e7eb}
+.application-intro{font-size:12px;color:#6b7280;margin:14px 0 18px}
+.application-form>label:not(.visually-hidden){display:block;margin:14px 0 6px;font-size:11px;font-weight:600;color:#374151}
+.application-form>label span{display:block;margin-top:3px;color:#6b7280;font-weight:400;font-size:10px}
+.application-form input:not([type=file]),.application-form input[type=file],.application-form textarea{display:block;width:100%;border:1px solid #d1d5db;border-radius:8px;background:white;padding:10px 11px;color:#111827;font:12px Inter,Arial,sans-serif;outline:none}
+.application-form input[type=file]{padding:9px;background:#f9fafb}
+.application-form textarea{resize:vertical;min-height:95px}
+.application-form input:focus,.application-form textarea:focus{border-color:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,.13)}
+.resume-or{display:flex;align-items:center;gap:10px;margin:13px 0 0;color:#9ca3af;font-size:9px;font-weight:700;letter-spacing:.6px}
+.resume-or:before,.resume-or:after{content:"";height:1px;background:#e5e7eb;flex:1}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.application-skills-label{margin-top:12px!important}
+.resume-validation{min-height:14px;margin:5px 0 0;color:#b91c1c;font-size:10px}
+.application-form-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:10px}
+.application-form-actions .button{min-height:41px}
+.application-form .prepare-application-button{width:100%;margin-top:9px}
+.application-form .prepare-application-button.is-loading{opacity:.7;cursor:wait}
+.preparation-disclaimer{margin:8px 0;color:#6b7280;font-size:10px;line-height:1.55}
+.prepared-match{margin-top:12px;padding:13px;border:1px solid #d1fae5;border-radius:10px;background:#f0fdf4}
+.prepared-match[hidden]{display:none}
+.prepared-match-heading{display:flex;justify-content:space-between;gap:10px;font-size:12px}
+.prepared-match-heading span{font-weight:700;color:#047857}
+.prepared-match-track{height:7px;margin-top:9px;overflow:hidden;border-radius:99px;background:#d1d5db}
+.prepared-match-track span{display:block;width:0;height:100%;border-radius:inherit;background:#10B981;transition:width .25s ease}
+.prepared-match p{margin:8px 0 0;color:#374151;font-size:11px;line-height:1.5}
+.prepared-match .prepared-missing{color:#92400e}
+.prepared-match label{display:block;margin:13px 0 5px;font-size:11px;font-weight:600}
+.sample-listings-note{margin:3px 0 18px;color:#6b7280;font-size:11px;line-height:1.5}
+.naukri-search-link{display:inline-flex;margin-top:12px}
+.saved-application-note{padding:9px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;color:#374151;font-size:11px}
+.saved-application-note summary{cursor:pointer;font-weight:600}
+.saved-application-note p{white-space:pre-wrap;line-height:1.5}
+.apply-submit-button:disabled{opacity:.58;cursor:not-allowed}
+.scam-safety-notice{display:flex;gap:14px;margin:16px 0 24px;padding:18px;border:1px solid #fed7aa;border-left:4px solid #f97316;border-radius:12px;background:#fffaf5;box-shadow:0 4px 12px rgba(0,0,0,.055)}
+.scam-safety-icon{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:50%;background:#ffedd5;color:#c2410c;font-size:17px;font-weight:800}
+.scam-safety-copy h2{margin:4px 0 7px;color:#7c2d12;font-size:16px;line-height:1.35}
+.scam-safety-copy p{margin:5px 0;color:#713f12;font-size:11px;line-height:1.6}
+.scam-report-link{display:inline-flex;gap:5px;margin-top:8px;color:#b45309;font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.tracker-status-note{margin:-12px 0 20px;padding:12px 14px;border:1px solid #dbeafe;border-radius:9px;background:#eff6ff;color:#1e3a8a;font-size:11px;line-height:1.6}
+.application-receipt{display:grid;gap:8px;padding:11px;border:1px solid #e5e7eb;border-radius:9px;background:#f9fafb}
+.receipt-row{display:grid;grid-template-columns:minmax(115px,.8fr) minmax(0,1.2fr);align-items:start;gap:8px;color:#6b7280;font-size:10px;line-height:1.5}
+.receipt-row>strong{color:#374151;font-size:10px;font-weight:700;overflow-wrap:anywhere}
+.application-status-pill{width:max-content;padding:3px 8px;border-radius:999px;background:#e0f2fe;color:#075985!important}
+.status-accepted{background:#dcfce7;color:#166534!important}
+.status-rejected{background:#fee2e2;color:#991b1b!important}
+.status-interview{background:#f3e8ff;color:#6b21a8!important}
+.status-under-review{background:#fef3c7;color:#92400e!important}
+.resume-received{color:#047857!important}
+.resume-not-recorded{color:#b91c1c!important}
+.final-status-note{color:#6b7280;font-size:9px;line-height:1.5}
+.toast-container{position:fixed;top:88px;right:22px;z-index:1000;display:grid;gap:10px;width:min(380px,calc(100vw - 32px));pointer-events:none}
+.app-toast{display:flex;align-items:center;gap:11px;padding:14px 15px;border:1px solid #bbf7d0;border-left:4px solid #10B981;border-radius:11px;background:#fff;color:#111827;box-shadow:0 10px 35px rgba(17,24,39,.16);font:600 13px Inter,Arial,sans-serif;pointer-events:auto;animation:toast-in .22s ease-out both}
+.toast-icon{display:grid;place-items:center;flex:none;width:24px;height:24px;border-radius:50%;background:#d1fae5;color:#047857;font-weight:800}
+.toast-text{flex:1}
+.toast-close{border:0;background:transparent;color:#6b7280;font-size:20px;line-height:1;cursor:pointer}
+.toast-error{border-color:#fecaca;border-left-color:#dc2626}
+.toast-error .toast-icon{background:#fee2e2;color:#b91c1c}
+.flash-stack{display:none}
+@keyframes toast-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:620px){.job-search-form{top:104px}.application-form{padding:19px}.toast-container{top:110px;right:12px}.apply-submit-button{width:100%}.scam-safety-notice{padding:14px;gap:10px}.receipt-row{grid-template-columns:1fr;gap:2px}}
+@media(prefers-reduced-motion:reduce){.job-card,.apply-now-button,.apply-submit-button,.app-toast{animation:none!important;transition:none!important}}
